@@ -19,10 +19,14 @@ long_description="""
 这里是说明
 
 使用bert微调提取实体，描述这些信息。
+
+==v0.0.0.04
+加入关键词清理 ## 问题
+
 """
 setup(
     name='tkitMarker_bert',
-    version='0.0.0.03',
+    version='0.0.0.04',
     description='Terry toolkit',
     author='Terry Chan',
     author_email='napoler2008@gmail.com',

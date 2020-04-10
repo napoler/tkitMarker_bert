@@ -41,6 +41,8 @@ class Marker:
         textArr = re.findall('.{'+str(lenth)+'}', text)
         textArr.append(text[(len(textArr)*lenth):])
         return textArr
+    def clear_word(self,word):
+        return word.replace("##", "")
     def pre(self,word,text,model,tokenizer):
         model.eval()
         text=word+"[SEP]"+text
@@ -75,13 +77,14 @@ class Marker:
                     words.append(word)
                     # words.append(word+mark_lable)
                     # print(words)
-                    all_ms.append("".join(words))
+                    
+                    all_ms.append(self.clear_word("".join(words)))
                     words=[]
                 elif mark_lable=="S-描述":
                     words=[]
                     words.append(word)
                     # words.append(word+mark_lable)
-                    all_ms.append("".join(words))
+                    all_ms.append(self.clear_word("".join(words)))
                     words=[]
                 elif mark_lable=="B-描述":
                     words=[]
@@ -128,12 +131,12 @@ class Marker:
                     
                     words.append(word)
                     # print(words)
-                    all_ms.append("".join(words))
+                    all_ms.append(self.clear_word("".join(words)))
                     words=[]
                 elif mark_lable=="S-实体":
                     words=[]
                     words.append(word)
-                    all_ms.append("".join(words))
+                    all_ms.append(self.clear_word("".join(words)))
                     words=[]
                 elif mark_lable=="B-实体":
                     words=[]

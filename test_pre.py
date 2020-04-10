@@ -28,22 +28,22 @@ print(word,pall)
 
 
 
-# # 加载ner模型
-# ner_pred=Marker(model_path="./model/ner")
-# ner_pred_model,ner_pred_tokenizer=ner_pred.load_model()
+# 加载ner模型
+ner_pred=Marker(model_path="./model/ner")
+ner_pred_model,ner_pred_tokenizer=ner_pred.load_model()
 
-# while  True:
-#     print("\n"*4)
-#     print("输入文字中的实体和文字,提取关于实体的描述信息")
-#     keyword=input("输入搜索关键词:")
-#     for it in search_content(keyword):
-#         print("##"*10+it.title)
-#         text=it.title+"\n"+it.content
-#         words=ner_pred.pre_ner(text,ner_pred_model,ner_pred_tokenizer)
-#         words=list(set(words))
-#         for word in words:
-#             pall=pred.pre(word,text,model,tokenizer)
-#             print(word,pall)
+while  True:
+    print("\n"*4)
+    print("输入文字中的实体和文字,提取关于实体的描述信息")
+    keyword=input("输入搜索关键词:")
+    for it in search_content(keyword):
+        print("##"*10+it.title)
+        text=it.title+"\n"+it.content
+        words=ner_pred.pre_ner(text,ner_pred_model,ner_pred_tokenizer)
+        words=list(set(words))
+        for word in words:
+            pall=pred.pre(word,text,model,tokenizer)
+            print(word,pall)
 
 # # i=0
 # # for it in DB.content_pet.find({}):
