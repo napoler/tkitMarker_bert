@@ -26,7 +26,7 @@ long_description="""
 """
 setup(
     name='tkitMarker_bert',
-    version='0.0.0.04',
+    version='0.0.0.05',
     description='Terry toolkit',
     author='Terry Chan',
     author_email='napoler2008@gmail.com',
@@ -37,7 +37,7 @@ setup(
     install_requires=[
 
         'tkitFile==0.0.1.2',
-        'tkitText==0.0.1.57',
+        'tkitText==0.0.1.58',
         'tqdm==4.45.0',
         'transformers==2.8.0'
 
