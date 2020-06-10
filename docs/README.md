@@ -24,6 +24,7 @@ print(word,pall)
 
 ```
 # 训练数据标记
+|[开源描述标注](https://www.terrychan.org/tmark_Description/)|基于实体提取对应文章中的描述
 https://github.com/napoler/tmark_Description
 
 
