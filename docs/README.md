@@ -27,7 +27,13 @@ print(word,pall)
 https://github.com/napoler/tmark_Description
 
 
+## 模型
+一个小模型，标记数据不是很多
+https://www.kaggle.com/terrychanorg/tmarkdescriptionmodel
+
 # 更多返回
+
+[By Terry Chan](https://www.terrychan.org/)
 
 
 
