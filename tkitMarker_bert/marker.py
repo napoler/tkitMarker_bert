@@ -55,7 +55,7 @@ class Marker:
         # self.model=model
         # self.tokenizer=tokenizer
         # self.model.eval()
-        # return model,tokenizer
+        return self.model,self.tokenizer
     def cut_text(self,obj,sec):
         """
         分割固定长度字符串
