@@ -6,6 +6,7 @@ from transformers import AutoModelForTokenClassification,AutoTokenizer
 import os
 import re
 import tkitFile
+import regex
 # from elasticsearch import Elasticsearch
 # from elasticsearch_dsl import Search
 # from elasticsearch_dsl import Q
@@ -68,16 +69,25 @@ class Marker:
     def clear_word(self,word):
         return word.replace("##", "")
     # @profile
+    def filterPunctuation(self,x):
+        x = regex.sub(r'[‘’]', "'", x)
+        x = regex.sub(r'[“”]', '"', x)
+        x = regex.sub(r'[…]', '...', x)
+        x = regex.sub(r'[—]', '-', x)
+        x = regex.sub(r"&nbsp", "", x)
+        return x
     def pre(self,word,text):
         
         model=self.model
-        text=word+"[SEP]"+text
+        # text=word+" [SEP] "+text
         lenth=500-len(word)
         all_ms=[]
         n=0
+        h_i=2+len(word)
         with torch.no_grad():
             # model = AutoModelForTokenClassification.from_pretrained(self.model_path)
             # model.to(self.device)      
+            text=self.filterPunctuation(text)
             for text_mini in self.cut_text(text,lenth):
                 # text_mini=word+"[SEP]"+text_mini
                 # print(word,"text_mini",text_mini)
@@ -87,17 +97,27 @@ class Marker:
                 input_ids = torch.tensor(ids['input_ids']).unsqueeze(0)  # Batch size 1
                 labels = torch.tensor([1] * input_ids.size(1)).unsqueeze(0)  # Batch size 1
                 outputs = model(input_ids, labels=labels)
-                # print(outputs)
+                # print("outputs",outputs)
                 tmp_eval_loss, logits  = outputs[:2]
                 # ids=tokenizer.encode(text)
-                # print(ids)
+                # print(ids['token_type_ids'])
 
                 # print("\n".join([i for i in self.lablels_dict.keys()]))
                 words=[]
                 for i,m in enumerate( torch.argmax(logits ,axis=2).tolist()[0]):
                     # print(m)
-                    # print(m,ids[i],tokenizer.convert_ids_to_tokens(ids[i]),self.lablels_dict[m])
+                    # if i<h_i:
+                    #     continue
+
+                    # print(i,m,ids['input_ids'][i],self.tokenizer.convert_ids_to_tokens(ids['input_ids'][i]),self.lablels_dict[m])
+                    # print(h_i)
                     word=self.tokenizer.convert_ids_to_tokens(ids['input_ids'][i])
+                    # try:
+                    #     word=text_mini[i-h_i]
+                    # except:
+                    #     continue
+                    # print(word)
+
 
                     if m >=len(self.lablels_dict):
                         mark_lable="X"

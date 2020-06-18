@@ -18,15 +18,15 @@ from tkitMarker_bert import Marker
 
 
 tt=tkitText.Text()
-text="柯基犬是一个小短腿"
-word="柯基犬"
+text="约克夏梗的头部经常用丝带装饰，并拥有梗类调皮的性格。约克夏梗拥有“上流 贵妇人香闺”般的魅力。"
+word="约克夏梗"
 #加载预测描述
 pred=Marker(model_path="./model")
 model,tokenizer=pred.load_model()
-pall=pred.pre(word,text,model,tokenizer)
+pall=pred.pre(word,text)
 print(word,pall)
 
-
+exit()
 
 # 加载ner模型
 ner_pred=Marker(model_path="./model/ner")

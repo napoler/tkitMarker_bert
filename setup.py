@@ -19,14 +19,16 @@ long_description="""
 这里是说明
 
 使用bert微调提取实体，描述这些信息。
-
+==0.0.0.07
+过滤掉中文标点
+解决bert中出现 [UNK]问题
 ==v0.0.0.04
 加入关键词清理 ## 问题
 
 """
 setup(
     name='tkitMarker_bert',
-    version='0.0.0.06',
+    version='0.0.0.07',
     description='Terry toolkit',
     author='Terry Chan',
     author_email='napoler2008@gmail.com',
@@ -35,13 +37,10 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     install_requires=[
-
         'tkitFile==0.0.1.2',
         'tkitText==0.0.1.58',
         'tqdm==4.45.0',
         'transformers==2.8.0'
-
-
     ],
     packages=['tkitMarker_bert'])
 
