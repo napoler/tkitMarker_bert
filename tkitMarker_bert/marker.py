@@ -207,3 +207,48 @@ class Marker:
                     pass
         return all_ms
 
+    def get_mark_data(self,data):
+        """
+        对标记的数据进行提取
+        {"text": ["树", "头", "菜", "（", "学", "名", "：", "）", "为", "山", "柑", "科", "鱼", "木", "属", "的", "植", "物", "。"], "label": ["B-实体", "M-实体", "E-实体", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"]} 
+
+        返回数据如下
+        {'实体': ['美国电视史', '中国人民大学出版社']}
+        """
+        all_ms={}
+        words=[]
+        for word,mark_lable in zip(data['text'],data['label']):
+            # its.append(line)
+            # print(mark_lable)
+            if mark_lable.startswith("E-" ) and len(words)>0:
+                words.append(word)
+                # print(words)
+                word_type=mark_lable.replace("E-",'')
+                # print("word_type",word_type)
+                try:
+                    all_ms[word_type].append(self.clear_word("".join(words)))
+                except:
+                    all_ms[word_type]=[]
+                    all_ms[word_type].append(self.clear_word("".join(words)))
+                words=[]
+            elif mark_lable.startswith("S-"):
+                words=[]
+                words.append(word)
+                word_type=mark_lable.replace("S-",'')
+                try:
+                    all_ms[word_type].append(self.clear_word("".join(words)))
+                except:
+                    all_ms[word_type]=[]
+                    all_ms[word_type].append(self.clear_word("".join(words)))
+
+                words=[]
+            elif mark_lable.startswith("B-"):
+                words=[]
+                words.append(word)
+            elif mark_lable.startswith("M-")  and len(words)>0:
+                words.append(word)
+            elif  mark_lable.startswith("O") or mark_lable.startswith("X"):
+                words=[]
+                pass
+        # print(all_ms)
+        return all_ms
