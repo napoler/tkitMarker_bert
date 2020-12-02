@@ -39,7 +39,7 @@ setup(
     install_requires=[
         'tkitFile==0.0.1.2',
         'tkitText==0.0.1.58',
-        'tqdm==4.45.0',
+        'tqdm==4.38.0',
         'transformers==2.8.0'
     ],
     packages=['tkitMarker_bert'])
